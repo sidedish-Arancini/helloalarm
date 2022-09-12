@@ -17,9 +17,9 @@ export const CryptoSelectBox: FC<Props> = () => {
   // }, []);
 
   return (
-    <>
+    <View className="px-3">
       <View className="mb-2">
-        <Text>Subscribe Crypto Symbols</Text>
+        <Text>구독 중인 코인</Text>
       </View>
       <FlatList
         className="flex-row"
@@ -28,11 +28,11 @@ export const CryptoSelectBox: FC<Props> = () => {
       />
       <Pressable onPress={() => setOpen(!open)}>
         <View className="w-full h-10 border-solid border border-gray pl-2 pr-4 flex-row items-center justify-between">
-          <Text>Select Crypto to Subscribe</Text>
+          <Text>구독할 코인을 선택하세요</Text>
           <Text className="text-medium">▿</Text>
         </View>
       </Pressable>
-    </>
+    </View>
   );
 };
 

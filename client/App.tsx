@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
@@ -14,10 +14,18 @@ export type Props = {
 
 const queryClient = new QueryClient();
 
+const navTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'white',
+  },
+};
+
 const App: React.FC<Props> = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
+      <NavigationContainer theme={navTheme}>
         <RootStack.Navigator initialRouteName="행복한 코딩세상">
           <RootStack.Screen name="행복한 코딩세상" component={HomeScreen} />
         </RootStack.Navigator>
