@@ -2,21 +2,13 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {CryptoSymbols} from './type';
 
-export const getPrice = (symbol: CryptoSymbols) => {
-  return axios({
-    method: 'get',
-    url: `/symbol=${symbol}`,
-  });
-};
-
-const url = 'http://localhost:3000/coin?symbol=BTCUSDT';
-export const getBTC = async () => {
-  const response = await axios.get(url);
+export const getPrice = async (symbol: CryptoSymbols) => {
+  const response = await axios.get(`/coin?symbol=${symbol}`);
   return response.data;
 };
 
-export const useGetBTC = () => {
-  const {isLoading, data} = useQuery(['getBTC'], getBTC);
+export const useGetCryptoPrice = (symbol: CryptoSymbols) => {
+  const {isLoading, data} = useQuery(['getBTC'], () => getPrice(symbol));
   return {data, isLoading};
 };
 
