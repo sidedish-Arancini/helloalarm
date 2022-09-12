@@ -8,7 +8,9 @@ export const getPrice = async (symbol: CryptoSymbols) => {
 };
 
 export const useGetCryptoPrice = (symbol: CryptoSymbols) => {
-  const {isLoading, data} = useQuery(['getBTC'], () => getPrice(symbol));
+  const {isLoading, data} = useQuery(['getBTC'], () => getPrice(symbol), {
+    refetchInterval: 1000,
+  });
   return {data, isLoading};
 };
 
