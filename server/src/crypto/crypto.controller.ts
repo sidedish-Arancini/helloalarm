@@ -10,4 +10,9 @@ export class CryptoController {
   async getPrice(@Query() param: { symbol: string }): Promise<string> {
     return await this.service.getPrice(param.symbol as CryptoSymbols);
   }
+
+  @Get('/list')
+  async getCryptoList() {
+    return await this.service.getCoinList();
+  }
 }
