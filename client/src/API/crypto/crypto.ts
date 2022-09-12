@@ -1,6 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
-import {Item} from 'react-native-multi-selectbox-typescript';
 import {CryptoSymbols} from './type';
 
 export const getPrice = (symbol: CryptoSymbols) => {
@@ -21,10 +20,10 @@ export const useGetBTC = () => {
   return {data, isLoading};
 };
 
-export const getCryptoList = (): Promise<Item[]> => {
+export const getCryptoList = (): Promise<string[]> => {
   return new Promise(ressolve => {
     const list = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'ADAUSDT', 'LUNAUSDT'];
 
-    ressolve(list.map(v => ({item: v, id: v})));
+    ressolve(list);
   });
 };
