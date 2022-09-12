@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const CryptoPrcieItem: FC<Props> = ({name}) => {
-  const {data} = useGetCryptoPrice('BTCUSDT');
+  const {data} = useGetCryptoPrice(name);
   return (
     <View className="py-3">
       <View className="flex-row justify-between">

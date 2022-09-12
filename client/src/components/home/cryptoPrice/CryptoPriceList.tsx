@@ -4,6 +4,8 @@ import {CryptoPrcieItem} from './CryptoPrcieItem';
 
 interface Props {}
 
+const MOCK_LIST = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
+
 export const CryptoPriceList: FC<Props> = () => {
   return (
     <View className="mt-4">
@@ -12,7 +14,9 @@ export const CryptoPriceList: FC<Props> = () => {
         <Text className="w-4/12 text-center">가격</Text>
       </View>
       <View className="px-3">
-        <CryptoPrcieItem name={'BTCUSDT'} />
+        {MOCK_LIST.map(v => (
+          <CryptoPrcieItem key={v} name={v} />
+        ))}
       </View>
     </View>
   );

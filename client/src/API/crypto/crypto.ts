@@ -1,23 +1,28 @@
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
-import {CryptoSymbols} from './type';
 
-export const getPrice = async (symbol: CryptoSymbols) => {
+const getPrice = async (symbol: string) => {
   const response = await axios.get(`/coin?symbol=${symbol}`);
   return response.data;
 };
 
-export const useGetCryptoPrice = (symbol: CryptoSymbols) => {
-  const {isLoading, data} = useQuery(['getBTC'], () => getPrice(symbol), {
-    refetchInterval: 1000,
-  });
+export const useGetCryptoPrice = (symbol: string) => {
+  const {isLoading, data} = useQuery(
+    ['getprice', symbol],
+    () => getPrice(symbol),
+    {
+      refetchInterval: 1000,
+    },
+  );
   return {data, isLoading};
 };
 
-export const getCryptoList = (): Promise<string[]> => {
-  return new Promise(ressolve => {
-    const list = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'ADAUSDT', 'LUNAUSDT'];
+const getCryptoList = async (): Promise<string[]> => {
+  const response = await axios.get(`/coin/list`);
+  return response.data;
+};
 
-    ressolve(list);
-  });
+export const useGetCryptoList = () => {
+  const {data} = useQuery(['getCryptoList'], getCryptoList);
+  return {data};
 };
