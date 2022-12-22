@@ -4,13 +4,19 @@ import { CryptoSymbols } from './cryptoType';
 
 const binance = new Binance();
 
+export type CryptoPriceListType = { symbol: CryptoSymbols; price: number }[];
+
 @Injectable()
 export class CryptoService {
-  async getPrice(symbol: CryptoSymbols = 'BTCUSDT'): Promise<string> {
+  async getPrice(
+    symbols: CryptoSymbols[] = ['BTCUSDT'],
+  ): Promise<CryptoPriceListType> {
     const futuresPrice = await binance.futuresPrices();
-    const cryptoPrice = futuresPrice[symbol];
+    const cryptoPriceList = symbols.map((symbol) => {
+      return { symbol, price: futuresPrice[symbol] };
+    });
 
-    return cryptoPrice;
+    return cryptoPriceList;
   }
 
   async getCoinList(): Promise<CryptoSymbols[]> {

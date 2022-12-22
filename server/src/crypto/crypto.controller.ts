@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { CryptoService } from './crypto.service';
+import { CryptoPriceListType, CryptoService } from './crypto.service';
 import { CryptoSymbols } from './cryptoType';
 
 @Controller('coin')
@@ -7,8 +7,12 @@ export class CryptoController {
   constructor(private readonly service: CryptoService) {}
 
   @Get()
-  async getPrice(@Query() param: { symbol: string }): Promise<string> {
-    return await this.service.getPrice(param.symbol as CryptoSymbols);
+  async getPrice(
+    @Query() param: { symbols: string },
+  ): Promise<CryptoPriceListType> {
+    const symbols = JSON.parse(param.symbols);
+
+    return await this.service.getPrice(symbols as CryptoSymbols[]);
   }
 
   @Get('/list')
